@@ -1,0 +1,1675 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bharath Sha Sher S.P — Java Full-Stack Developer</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg: #D8c29c;
+      --text: #434824;
+      --panel: rgba(255, 255, 255, 0.2);
+      --muted: #856128;
+      --accent: #434824;
+      --accent-2: #856128;
+      --glass: rgba(67, 72, 36, 0.05);
+      --border: #856128;
+      --card-bg: rgba(255, 255, 255, 0.15);
+    }
+
+    [data-theme="dark"] {
+      --bg: #020617;
+      --text: #f1f5f9;
+      --panel: rgba(15, 23, 42, 0.6);
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #0ea5e9;
+      --glass: rgba(2, 6, 23, 0.8);
+      --border: #1e293b;
+      --card-bg: #0f172a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+      overflow-x: hidden;
+      background: var(--bg);
+      transition: background-color 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background: transparent;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: color 0.3s ease;
+    }
+
+    body.fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    body.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* NAV */
+    .navbar {
+      background: rgba(216, 194, 156, 0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(6px);
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      transition: padding 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: var(--bg);
+      opacity: 0.95;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .brand-bubble {
+      width: 44px;
+      height: 44px;
+    }
+
+    .brand-bubble img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .nav-link {
+      color: var(--text) !important;
+      font-weight: 500
+    }
+
+    .nav-link:hover {
+      color: var(--accent) !important
+    }
+
+    .nav-link.active {
+      color: var(--accent) !important;
+      position: relative;
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 3px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 95vh;
+      display: flex;
+      align-items: center;
+      padding-top: 10rem;
+      padding-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+      perspective: 1200px;
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      line-height: 1.02;
+      margin-bottom: .6rem;
+      letter-spacing: -0.6px;
+    }
+
+    .hero-left .name {
+      color: var(--accent);
+      display: inline-block;
+    }
+
+    .lead-muted {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .hero>.container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: -10%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(67, 72, 36, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translateZ(-50px) rotateX(60deg);
+      animation: float3d 10s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 10%;
+      right: -5%;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, rgba(133, 97, 40, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translateZ(-30px) rotateY(-45deg);
+      animation: float3d-reverse 12s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    @keyframes float3d {
+
+      0%,
+      100% {
+        transform: translateZ(-50px) rotateX(60deg) translateY(0px);
+      }
+
+      50% {
+        transform: translateZ(-50px) rotateX(60deg) translateY(-30px);
+      }
+    }
+
+    @keyframes float3d-reverse {
+
+      0%,
+      100% {
+        transform: translateZ(-30px) rotateY(-45deg) translateY(0px);
+      }
+
+      50% {
+        transform: translateZ(-30px) rotateY(-45deg) translateY(30px);
+      }
+    }
+
+    .cta {
+      display: inline-flex;
+      gap: .6rem;
+      align-items: center;
+      padding: .6rem 1.5rem;
+      border-radius: 2px;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      transition: all .25s ease;
+      font-family: 'Goudy Bookletter 1911', serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+    }
+
+    .cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0 var(--muted);
+    }
+
+    .cta:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .profile-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .skill-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px 4px 20px;
+      border-radius: 2px;
+      margin: 0;
+      white-space: nowrap;
+      background-color: #f0e6d2;
+      background-image: repeating-linear-gradient(45deg, rgba(133, 97, 40, 0.05) 0px, rgba(133, 97, 40, 0.05) 1px, transparent 1px, transparent 4px);
+      color: #434824;
+      font-size: .75rem;
+      border: 1px solid var(--border);
+      position: relative;
+      box-shadow: 2px 2px 0 rgba(67, 72, 36, 0.1);
+      font-family: 'Goudy Bookletter 1911', serif;
+      font-weight: 600;
+      transform-origin: 14px -10px;
+      animation: sway 3s ease-in-out infinite;
+    }
+
+    .skill-pill img {
+      height: 16px;
+    }
+
+    .skill-pill::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      background: #434824;
+      border-radius: 50%;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3);
+    }
+
+    .skill-pill::after {
+      content: "";
+      position: absolute;
+      left: 9.5px;
+      top: -10px;
+      width: 1px;
+      height: 20px;
+      background: #6d5c4d;
+      z-index: -1;
+    }
+
+    @keyframes sway {
+
+      0%,
+      100% {
+        transform: rotate(-2deg);
+      }
+
+      50% {
+        transform: rotate(2deg);
+      }
+    }
+
+    .skill-pill:nth-child(odd) {
+      animation-duration: 3.2s;
+      animation-delay: 0.1s;
+    }
+
+    .skill-pill:nth-child(even) {
+      animation-duration: 4.1s;
+      animation-delay: -1.5s;
+    }
+
+    .skill-pill:nth-child(3n) {
+      animation-duration: 2.9s;
+      animation-delay: -0.5s;
+    }
+
+    .skill-pill:nth-child(5n) {
+      animation-duration: 4.8s;
+      animation-delay: -2.2s;
+    }
+
+    .skill-pill:hover {
+      animation: none;
+      transform: rotate(0deg) scale(1.05);
+      z-index: 10;
+      background-color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .profile-card .btn img {
+      height: 20px;
+    }
+
+    /* SECTION HEAD */
+    .section-title {
+      font-weight: 700;
+      font-size: 2.5rem;
+      position: relative;
+      display: block;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      height: 4px;
+      width: 80px;
+      border-radius: 4px;
+      margin: 0.5rem auto 2rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    /* Projects grid */
+    .proj-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .proj-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 40px rgba(67, 72, 36, 0.2);
+      border-color: var(--accent);
+    }
+
+    .proj-thumb {
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(67, 72, 36, 0.1);
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      position: relative;
+      text-align: center;
+      padding: 0 .5rem;
+    }
+
+    .proj-thumb::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-shadow: inset 0 0 20px rgba(67, 72, 36, 0.5);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .proj-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease, filter 0.5s ease;
+      filter: sepia(0.4) contrast(1.1) brightness(0.9) grayscale(0.2);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .proj-card:hover .proj-thumb img {
+      transform: scale(1.1);
+      filter: none;
+    }
+
+    .proj-thumb i {
+      font-size: 2.6rem;
+    }
+
+    .proj-list {
+      color: var(--muted);
+      font-size: .9rem;
+      padding-left: 1.1rem;
+      margin-bottom: .5rem;
+    }
+
+    .proj-year {
+      font-size: .8rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* skill bars */
+    .skill-item {
+      margin-top: .8rem;
+    }
+
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: .9rem;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+
+    .skill-bar-container {
+      width: 100%;
+      height: 26px;
+      background: rgba(67, 72, 36, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      border-radius: 4px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #000;
+      white-space: nowrap;
+    }
+
+    .skills-grid {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    section {
+      padding: 7rem 0;
+    }
+
+    /* Timeline (experience / education) */
+    .timeline {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding-left: 2rem;
+      border-left: 2px solid var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: calc(-2rem - 8px);
+      top: 1.4rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+    }
+
+    .timeline-date {
+      font-size: .85rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .timeline-item ul {
+      color: var(--muted);
+      font-size: .95rem;
+      margin-top: .6rem;
+      margin-bottom: 0;
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .info-list li {
+      margin-bottom: .6rem;
+      line-height: 1.5;
+    }
+
+    .info-list i {
+      color: var(--accent);
+      margin-right: .5rem;
+    }
+
+    /* contact form styles */
+    .form-control,
+    .form-control:focus {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .form-label {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .show-validation .form-control:invalid {
+      border-color: #ff6b6b !important;
+    }
+
+    footer {
+      padding: 2rem 0;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    @media (max-width:991px) {
+      .hero {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        min-height: 68vh;
+      }
+
+      .profile-card {
+        margin-top: 1rem;
+      }
+    }
+
+    /* Scroll animations */
+    .scroll-section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .scroll-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .neon-btn {
+      padding: 10px 25px;
+      text-transform: uppercase;
+      border-radius: 2px;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--accent);
+      background: transparent;
+      cursor: pointer;
+      border: 3px double var(--accent);
+      transition: all 0.3s ease;
+      user-select: none;
+      text-decoration: none;
+      display: inline-block;
+      letter-spacing: 1px;
+    }
+
+    .neon-btn:hover,
+    .neon-btn:focus {
+      color: var(--bg);
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 4px 4px 0 rgba(67, 72, 36, 0.2);
+      transform: translate(-2px, -2px);
+    }
+
+    .uiverse-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #434824;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      transition: all 1s ease-in-out;
+      padding: 1.5rem;
+      z-index: 1;
+      min-height: 200px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .uiverse-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 100% 107%, #856128 0%, #434824 60%, #1a1c0e 100%);
+      z-index: -2;
+    }
+
+    .uiverse-box {
+      position: absolute;
+      padding: 10px;
+      text-align: right;
+      background: rgba(255, 255, 255, 0.05);
+      border-top: 2px solid #D8c29c;
+      border-right: 1px solid #D8c29c;
+      border-radius: 10% 13% 42% 0%/10% 12% 75% 0%;
+      box-shadow: rgba(100, 100, 111, 0.364) -7px 7px 29px 0px;
+      transform-origin: bottom left;
+      transition: all 1s ease-in-out;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+    }
+
+    .uiverse-box::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .uiverse-box1 {
+      width: 95%;
+      height: 95%;
+      bottom: -95%;
+      left: -95%;
+      padding: 10px;
+    }
+
+    .uiverse-box1::before {
+      background: radial-gradient(circle at 30% 107%, #D8c29c 0%, #856128 90%);
+    }
+
+    .uiverse-box2 {
+      width: 80%;
+      height: 80%;
+      bottom: -80%;
+      left: -80%;
+      transition-delay: 0.1s;
+      padding: 10px;
+    }
+
+    .uiverse-box2::before {
+      background: radial-gradient(circle at 30% 107%, #D8c29c 0%, #856128 90%);
+    }
+
+    .uiverse-box3 {
+      width: 65%;
+      height: 65%;
+      bottom: -65%;
+      left: -65%;
+      transition-delay: 0.2s;
+      padding: 10px;
+    }
+
+    .uiverse-box3::before {
+      background: radial-gradient(circle at 30% 107%, #D8c29c 0%, #856128 90%);
+    }
+
+    .uiverse-box4 {
+      width: 50%;
+      height: 50%;
+      bottom: -50%;
+      left: -50%;
+      transition-delay: 0.3s;
+      padding: 10px;
+    }
+
+    .uiverse-box4::before {
+      background: radial-gradient(circle at 30% 107%, #D8c29c 0%, #856128 90%);
+    }
+
+    .uiverse-box5 {
+      width: 35%;
+      height: 35%;
+      bottom: -35%;
+      left: -35%;
+      transition-delay: 0.4s;
+      padding: 10px;
+    }
+
+    .uiverse-box5::before {
+      background: radial-gradient(circle at 30% 107%, #D8c29c 0%, #856128 100%);
+    }
+
+    .uiverse-card:hover {
+      transform: scale(1.05);
+    }
+
+    .uiverse-card:hover .uiverse-box {
+      bottom: -1px;
+      left: -1px;
+    }
+
+    .uiverse-card h6 {
+      color: #D8c29c !important;
+      font-weight: 700;
+      position: relative;
+      z-index: 10;
+      font-size: 1.8rem;
+      transition: 0.4s ease-in-out;
+      margin-top: 10px;
+    }
+
+    .uiverse-card:hover h6 {
+      opacity: 0;
+    }
+
+    .box-text {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #D8c29c;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-family: 'Courier New', Courier, monospace;
+      cursor: pointer;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .box-text:hover {
+      transform: scale(1.1);
+      color: #fff;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-animate {
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes iconPulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .uiverse-card h6 i {
+      display: inline-block;
+      animation: iconPulse 2s infinite ease-in-out;
+    }
+
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 9999;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--bg);
+      border: 2px solid var(--bg);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(67, 72, 36, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    #backToTop:hover {
+      transform: translateY(-5px);
+      background: var(--bg);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    #stars {
+      position: fixed;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 300%;
+      z-index: -1;
+      pointer-events: none;
+      display: none;
+    }
+
+    [data-theme="dark"] #stars {
+      display: block;
+    }
+
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle var(--duration) ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+
+      0%,
+      100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+      }
+
+      50% {
+        opacity: 0.8;
+        transform: scale(1.2);
+      }
+    }
+  </style>
+</head>
+
+<body class="fade-in">
+  <div id="stars"></div>
+
+  <!-- NAV -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="d-flex align-items-center gap-2 text-decoration-none" href="#home">
+        <div class="brand-bubble"><img src="portfolioimg/java.png" alt="Brand Logo"></div>
+        <div>
+          <div style="font-weight:600;color:var(--text);">Bharath</div>
+          <div style="font-size:.78rem;color:var(--text);font-weight:700;margin-top:-2px;">Java Full Stack Developer</div>
+        </div>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item ms-lg-2"><button id="themeToggle" class="nav-link bg-transparent border-0"
+              title="Toggle Dark Mode"><i class="fa-solid fa-moon"></i></button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero">
+    <div class="container">
+      <div class="row align-items-center">
+        <!-- left -->
+        <div class="col-lg-7 hero-left">
+          <h1 class="hero-animate" style="transform-style: preserve-3d; transform: translateZ(30px) rotateX(2deg);">Hi —
+            I’m <span class="name name-highlight name" style="color:var(--accent)">Bharath
+              Sha Sher
+              S.P</span></h1>
+          <p class="lead-muted hero-animate" style="animation-delay: 0.2s; transform: translateZ(20px) rotateY(-1deg);">
+            Java Developer | Trainee. A Computer Science graduate with a solid understanding of Java, JDBC, Hibernate,
+            Spring Framework and MySQL, passionate about backend development and building efficient, scalable
+            applications. Eager to contribute clean code, strong problem-solving and a continuous learning mindset to a
+            dynamic development team.</p>
+
+          <div class="d-flex gap-3 flex-wrap hero-animate" style="animation-delay: 0.4s; transform: translateZ(25px);">
+            <a class="neon-btn" href="#projects" style="transform-style: preserve-3d; transition: transform 0.3s ease;"
+              onmouseover="this.style.transform='translateZ(10px) rotateX(-5deg)'"
+              onmouseout="this.style.transform='translateZ(0px)'"><i class="fa fa-code"></i> View Projects</a>
+            <a class="neon-btn" href="#contact" style="transform-style: preserve-3d; transition: transform 0.3s ease;"
+              onmouseover="this.style.transform='translateZ(10px) rotateY(5deg)'"
+              onmouseout="this.style.transform='translateZ(0px)'">Hire / Contact</a>
+          </div>
+
+          <div class="mt-4 hero-animate"
+            style="color:var(--muted);font-size:.95rem;animation-delay: 0.6s; transform: translateZ(15px);">
+            <i class="fa fa-map-marker-alt me-2"></i>Palakkad, Kerala &nbsp; • &nbsp;
+            <i class="fa fa-envelope me-2"></i><a href="mailto:bharathshasherofficial@gmail.com"
+              style="color:var(--muted);text-decoration:none;">bharathshasherofficial@gmail.com</a>
+          </div>
+        </div>
+
+        <!-- right -->
+        <div class="col-lg-5">
+          <div class="profile-card"
+            style="transform-style: preserve-3d; transform: translateZ(40px) rotateY(3deg); transition: transform 0.3s ease;"
+            onmouseover="this.style.transform='translateZ(40px) rotateY(3deg) rotateX(-2deg)'"
+            onmouseout="this.style.transform='translateZ(40px) rotateY(3deg)'">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <img src="/portfolioimg/profile.jpg" alt="Profile Picture"
+                style="width:68px;height:68px;border-radius:12px;object-fit:cover;">
+              <div>
+                <div style="font-weight:700;color:var(--text);">Bharath Sha Sher S.P</div>
+                <div style="color:var(--muted);font-size:.92rem;margin-top:4px;">Java Full Stack Developer Intern</div>
+              </div>
+            </div>
+
+            <p style="color:var(--muted);margin-top:1rem;font-size:.95rem;">
+              Currently interning at Quest Innovative Solutions, Calicut, building Java web applications with Servlets,
+              JDBC and MySQL, and responsive front-ends with Bootstrap.
+            </p>
+
+            <div class="mt-2">
+              <div style="font-size:.85rem;color:var(--muted);">Tech</div>
+              <div class="skills-grid">
+                <span class="skill-pill"><img src="/portfolioimg/java.png" alt="Java logo">Java</span>
+                <span class="skill-pill"><img src="/portfolioimg/spring.png" alt="Spring">Spring</span>
+                <span class="skill-pill"><img src="/portfolioimg/Springboot.png" alt="Springboot">Spring Boot</span>
+                <span class="skill-pill">Hibernate</span>
+                <span class="skill-pill">JDBC</span>
+                <span class="skill-pill">Servlets</span>
+                <span class="skill-pill"><img src="/portfolioimg/mysql.png" alt="MySql logo">MySQL</span>
+                <span class="skill-pill"><img src="/portfolioimg/html.jpg" alt="HTML logo">HTML</span>
+                <span class="skill-pill"><img src="/portfolioimg/css.jpg" alt="CSS logo">CSS</span>
+                <span class="skill-pill"><img src="/portfolioimg/js.png" alt="JavaScript logo">JavaScript</span>
+                <span class="skill-pill"><img src="/portfolioimg/jq.png" alt="jQuery logo">jQuery</span>
+                <span class="skill-pill"><img src="/portfolioimg/bootstrap.png" alt="Bootstrap logo">Bootstrap</span>
+              </div>
+            </div>
+
+            <div class="mt-3 d-flex gap-2">
+              <a class="btn" href="https://www.linkedin.com/in/bharath-sha-sher-s-p-89024b293"
+                style="border:1px solid var(--accent); color:var(--accent);" target="_blank"><img
+                  src="/portfolioimg/linked.jpg" alt="LinkedIn"></a>
+              <a class="btn" href="https://github.com/B-12312"
+                style="border:1px solid var(--accent); color:var(--accent);" target="_blank"><img
+                  src="/portfolioimg/git.jpg" alt="GitHub"></a>
+              <a class="btn" href="portfolioimg/Java_Fullstack (1).pdf" download="Bharath_Resume.pdf"
+                style="background:var(--accent); color:#D8c29c;"><i class="fa fa-download"></i> CV</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h3 class="section-title">About</h3>
+      <div class="row g-4">
+        <div class="col-lg-7 scroll-section">
+          <p style="color:var(--muted);margin-top:1rem;line-height:1.6;">
+            I'm an enthusiastic and motivated Computer Science graduate with a solid understanding of Java programming,
+            JDBC, Hibernate, Spring Framework and MySQL. I'm passionate about backend development and building
+            efficient, scalable applications, with strong knowledge of object-oriented programming, database management
+            and software development principles. A quick learner with analytical and problem-solving skills, I'm eager
+            to contribute to a dynamic development team while continuously expanding my technical expertise.
+          </p>
+          <ul style="color:var(--muted);margin-top:1rem;">
+            <li>Currently working as a Java Full Stack Developer Intern.</li>
+            <li>Available for internships and junior Developer positions.</li>
+            <li>Comfortable with Agile and Scrum, Git/GitHub workflows and responsive design.</li>
+          </ul>
+
+          <h6 style="color:var(--text);margin-top:1.5rem;">Soft Skills</h6>
+          <div class="skills-grid">
+            <span class="skill-pill">Communication</span>
+            <span class="skill-pill">Quick Learner</span>
+            <span class="skill-pill">Active Listening</span>
+            <span class="skill-pill">Creative Thinking</span>
+            <span class="skill-pill">Adaptability</span>
+            <span class="skill-pill">Time Management</span>
+            <span class="skill-pill">Conflict Resolution</span>
+          </div>
+        </div>
+
+        <div class="col-lg-5 scroll-section" style="transition-delay: 0.1s;">
+          <div class="profile-card">
+            <h6 style="color:var(--text);">Quick Facts</h6>
+            <div style="color:var(--muted);margin-top:.5rem;line-height:1.7;">
+              <div><strong>Location:</strong> Palakkad, Kerala</div>
+              <div><strong>Role:</strong> Java Developer | Trainee</div>
+              <div><strong>Education:</strong> BCA, AJK College of Arts and Science (2025)</div>
+              <div><strong>Languages:</strong> Malayalam, English, Tamil</div>
+              <div><strong>Email:</strong> bharathshasherofficial@gmail.com</div>
+              <div><strong>Phone:</strong> +91 8590676575</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <h3 class="section-title">Skills</h3>
+      <div class="row g-3 mt-3">
+        <div class="col-md-4 scroll-section">
+          <div class="uiverse-card">
+            <div class="uiverse-bg"></div>
+            <div class="uiverse-box uiverse-box1"><span class="box-text">Responsive</span></div>
+            <div class="uiverse-box uiverse-box2"><span class="box-text">jQuery</span></div>
+            <div class="uiverse-box uiverse-box3"><span class="box-text">Bootstrap</span></div>
+            <div class="uiverse-box uiverse-box4"><span class="box-text">JavaScript</span></div>
+            <div class="uiverse-box uiverse-box5"><span class="box-text">HTML5 / CSS3</span></div>
+            <h6><i class="fa-solid fa-globe me-2"></i>Web Technologies</h6>
+          </div>
+        </div>
+        <div class="col-md-4 scroll-section" style="transition-delay: 0.1s;">
+          <div class="uiverse-card">
+            <div class="uiverse-bg"></div>
+            <div class="uiverse-box uiverse-box1"><span class="box-text">Java</span></div>
+            <div class="uiverse-box uiverse-box2"><span class="box-text">SQL</span></div>
+            <div class="uiverse-box uiverse-box3"><span class="box-text">Python (Basic)</span></div>
+            <div class="uiverse-box uiverse-box4"><span class="box-text">MySQL</span></div>
+            <div class="uiverse-box uiverse-box5"><span class="box-text">Core Java</span></div>
+            <h6><i class="fa-solid fa-code me-2"></i>Languages &amp; Database</h6>
+          </div>
+        </div>
+        <div class="col-md-4 scroll-section" style="transition-delay: 0.2s;">
+          <div class="uiverse-card">
+            <div class="uiverse-bg"></div>
+            <div class="uiverse-box uiverse-box1"><span class="box-text">Spring Boot</span></div>
+            <div class="uiverse-box uiverse-box2"><span class="box-text">Spring</span></div>
+            <div class="uiverse-box uiverse-box3"><span class="box-text">Hibernate</span></div>
+            <div class="uiverse-box uiverse-box4"><span class="box-text">Servlets</span></div>
+            <div class="uiverse-box uiverse-box5"><span class="box-text">JDBC</span></div>
+            <h6><i class="fa-solid fa-leaf me-2"></i>Frameworks &amp; Java APIs</h6>
+          </div>
+        </div>
+        <div class="col-md-4 scroll-section">
+          <div class="uiverse-card">
+            <div class="uiverse-bg"></div>
+            <div class="uiverse-box uiverse-box1"><span class="box-text">OOP</span></div>
+            <div class="uiverse-box uiverse-box2"><span class="box-text">DBMS</span></div>
+            <div class="uiverse-box uiverse-box3"><span class="box-text">Collections</span></div>
+            <div class="uiverse-box uiverse-box4"><span class="box-text">Exceptions</span></div>
+            <div class="uiverse-box uiverse-box5"><span class="box-text">Multithreading</span></div>
+            <h6><i class="fa-solid fa-gears me-2"></i>Core Concepts</h6>
+          </div>
+        </div>
+        <div class="col-md-4 scroll-section" style="transition-delay: 0.1s;">
+          <div class="uiverse-card">
+            <div class="uiverse-bg"></div>
+            <div class="uiverse-box uiverse-box1"><span class="box-text">VS Code</span></div>
+            <div class="uiverse-box uiverse-box2"><span class="box-text">Git/GitHub</span></div>
+            <div class="uiverse-box uiverse-box3"><span class="box-text">Workbench</span></div>
+            <div class="uiverse-box uiverse-box4"><span class="box-text">Postman</span></div>
+            <div class="uiverse-box uiverse-box5"><span class="box-text">Eclipse</span></div>
+            <h6><i class="fa-solid fa-toolbox me-2"></i>Tools</h6>
+          </div>
+        </div>
+        <div class="col-md-4 scroll-section" style="transition-delay: 0.2s;">
+          <div class="uiverse-card">
+            <div class="uiverse-bg"></div>
+            <div class="uiverse-box uiverse-box1"><span class="box-text">ChatGPT</span></div>
+            <div class="uiverse-box uiverse-box2"><span class="box-text">Copilot</span></div>
+            <div class="uiverse-box uiverse-box3"><span class="box-text">Claude</span></div>
+            <div class="uiverse-box uiverse-box4"><span class="box-text">Prompting</span></div>
+            <div class="uiverse-box uiverse-box5"><span class="box-text">Agile/Scrum</span></div>
+            <h6><i class="fa-solid fa-robot me-2"></i>Generative AI &amp; Methods</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <h3 class="section-title">Experience</h3>
+      <div class="timeline mt-4">
+        <div class="timeline-item scroll-section">
+          <div class="proj-card p-3">
+            <div class="timeline-date">Present</div>
+            <h5 style="margin-bottom:.1rem">Java FullStack Developer Intern</h5>
+            <div style="color:var(--muted);font-size:.95rem;">Quest Innovative Solutions, Calicut</div>
+            <ul>
+              <li>Designed and implemented web applications and responsive websites using Java Servlets, JDBC, MySQL,
+                HTML, CSS, Bootstrap and JavaScript.</li>
+              <li>Developed a Student Management System with CRUD functionality (Add, View, Update, Delete) ensuring
+                seamless database connectivity and error handling.</li>
+              <li>Built a personal portfolio website with responsive UI and an integrated EmailJS contact form to
+                showcase projects and enable direct communication.</li>
+              <li>Created a responsive e-commerce platform (Redstore) featuring a product catalog, shopping cart and
+                checkout modules with product filtering and cart management.</li>
+              <li>Collaborated on clean code practices, version control with Git/GitHub, and deployment using Apache
+                Tomcat and Netlify.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <h3 class="section-title">Recent Projects</h3>
+      <p class="text-center mb-5" style="color:var(--muted); margin-top:-1.5rem;">Selected back-end and front-end
+        projects — demos + source.</p>
+
+      <p class="text-center" style="color:var(--muted);font-weight:600;">Back-end &amp; Full-Stack Projects</p>
+      <div class="row g-4 mt-1">
+        <!-- Student Management System -->
+        <div class="col-md-6 col-lg-4 scroll-section">
+          <div class="proj-card h-100">
+            <div class="proj-thumb"><i class="fa-solid fa-user-graduate"></i></div>
+            <div class="p-3">
+              <h5 style="margin-bottom:.25rem">Student Management System</h5>
+              <div class="proj-year">2026</div>
+              <p style="color:var(--muted);font-size:.95rem">CRUD-based web application using Java Servlets and MySQL
+                to manage student records.</p>
+              <ul class="proj-list">
+                <li>Modules: Add, View, Update and Delete Student</li>
+                <li>Servlet-based architecture with JDBC connectivity</li>
+                <li>Error handling, clean HTML forms and redirect workflow</li>
+              </ul>
+              <div class="mt-2 d-flex flex-wrap gap-2">
+                <span class="skill-pill">Servlets</span>
+                <span class="skill-pill">JDBC</span>
+                <span class="skill-pill">MySQL</span>
+                <span class="skill-pill">Tomcat</span>
+              </div>
+              <div class="mt-3 d-flex gap-2">
+                <a class="btn btn-sm" style="background:var(--accent); color:var(--bg);"
+                  href="https://github.com/B-12312/Student%20Management%20System" target="_blank">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Air Writing -->
+        <div class="col-md-6 col-lg-4 scroll-section" style="transition-delay: 0.1s;">
+          <div class="proj-card h-100">
+            <div class="proj-thumb"><i class="fa-solid fa-hand-sparkles"></i></div>
+            <div class="p-3">
+              <h5 style="margin-bottom:.25rem">Air Writing Project</h5>
+              <div class="proj-year">2026</div>
+              <p style="color:var(--muted);font-size:.95rem">Python-based GUI application using Tkinter and Pillow to
+                recognize and process air-written gestures.</p>
+              <ul class="proj-list">
+                <li>Tkinter interface with PIL image rendering</li>
+                <li>Gesture recognition logic and event triggers</li>
+                <li>System integration (os, subprocess, webbrowser)</li>
+              </ul>
+              <div class="mt-2 d-flex flex-wrap gap-2">
+                <span class="skill-pill">Python</span>
+                <span class="skill-pill">Tkinter</span>
+                <span class="skill-pill">Pillow</span>
+              </div>
+              <div class="mt-3 d-flex gap-2">
+                <a class="btn btn-sm" style="background:var(--accent); color:var(--bg);"
+                  href="https://github.com/B-12312/Air-Writing" target="_blank">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Portfolio -->
+        <div class="col-md-6 col-lg-4 scroll-section" style="transition-delay: 0.2s;">
+          <div class="proj-card h-100">
+            <div class="proj-thumb"><i class="fa-solid fa-id-card"></i></div>
+            <div class="p-3">
+              <h5 style="margin-bottom:.25rem">Website Portfolio</h5>
+              <div class="proj-year">2026</div>
+              <p style="color:var(--muted);font-size:.95rem">Personal portfolio with a responsive UI and an EmailJS
+                contact form, with interactive sections showcasing projects.</p>
+              <div class="mt-2 d-flex flex-wrap gap-2">
+                <span class="skill-pill">HTML5</span>
+                <span class="skill-pill">CSS3</span>
+                <span class="skill-pill">Bootstrap</span>
+                <span class="skill-pill">JavaScript</span>
+              </div>
+              <div class="mt-3 d-flex gap-2">
+                <a class="btn btn-sm" style="border:1px solid var(--accent); color:var(--accent);"
+                  href="https://bharath-website-portfolio.netlify.app" target="_blank">Visit Site</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-center" style="color:var(--muted);font-weight:600;margin-top:4rem;">Front-end Projects</p>
+      <div class="row g-4 mt-1">
+        <!-- Red Store -->
+        <div class="col-md-6 col-lg-4 scroll-section">
+          <div class="proj-card h-100">
+            <div class="proj-thumb">
+              <img src="portfolioimg/redsrore_preview.jpeg" alt="Red Store"
+                onerror="this.style.display='none';this.parentNode.innerText='Redstore E-Commerce Website'">
+            </div>
+            <div class="p-3">
+              <h5 style="margin-bottom:.25rem">Redstore E-Commerce Website</h5>
+              <div class="proj-year">2025</div>
+              <p style="color:var(--muted);font-size:.95rem">Responsive e-commerce website with product listing, cart
+                and checkout. Browse products, add to cart and proceed to checkout.</p>
+              <ul class="proj-list">
+                <li>Modules: Product Catalog, Shopping Cart, Checkout</li>
+                <li>Responsive layout, product filtering, cart management</li>
+              </ul>
+              <div class="mt-2 d-grid gap-2" style="grid-template-columns: repeat(3, 1fr);">
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/html.jpg"
+                    alt="HTML logo">HTML</span>
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/css.jpg"
+                    alt="CSS logo">CSS</span>
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/js.png"
+                    alt="JavaScript logo">JS</span>
+              </div>
+              <div class="mt-3 d-flex gap-2">
+                <a class="btn btn-sm" style="border:1px solid var(--accent); color:var(--accent);"
+                  href="https://red-store-bharath.netlify.app/" target="_blank">Visit Site</a>
+                <a class="btn btn-sm" style="background:var(--accent); color:var(--bg);"
+                  href="https://github.com/B-12312/Redstore.git" target="_blank">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Facebook -->
+        <div class="col-md-6 col-lg-4 scroll-section" style="transition-delay: 0.1s;">
+          <div class="proj-card h-100">
+            <div class="proj-thumb">
+              <img src="portfolioimg/faceBook_Preview.jpeg" alt="Facebook Interface"
+                onerror="this.style.display='none';this.parentNode.innerText='Facebook Homepage Interface'">
+            </div>
+            <div class="p-3">
+              <h5 style="margin-bottom:.25rem">Facebook Homepage Interface</h5>
+              <p style="color:var(--muted);font-size:.95rem">Developed a responsive clone of the classic Facebook
+                landing page interface. Utilized HTML for structural elements and form handling, alongside CSS Flexbox
+                and media queries to ensure adaptive layouts across varied device sizes.</p>
+              <div class="mt-2 d-grid gap-2" style="grid-template-columns: repeat(3, 1fr);">
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/html.jpg"
+                    alt="HTML logo">HTML</span>
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/css.jpg"
+                    alt="CSS logo">CSS</span>
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/js.png"
+                    alt="JavaScript logo">JS</span>
+              </div>
+              <div class="mt-3 d-flex gap-2">
+                <a class="btn btn-sm" style="border:1px solid var(--accent); color:var(--accent);"
+                  href="https://faceboook-homepagebharathshasher.netlify.app/" target="_blank">Visit Site</a>
+                <a class="btn btn-sm" style="background:var(--accent); color:var(--bg);"
+                  href="https://github.com/B-12312/Sample_Facebook.git" target="_blank">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloom -->
+        <div class="col-md-6 col-lg-4 scroll-section" style="transition-delay: 0.2s;">
+          <div class="proj-card h-100">
+            <div class="proj-thumb">
+              <img src="portfolioimg/Bloom.jpeg" alt="BLOOM"
+                onerror="this.style.display='none';this.parentNode.innerText='BLOOM'">
+            </div>
+            <div class="p-3">
+              <h5 style="margin-bottom:.25rem">BLOOM</h5>
+              <p style="color:var(--muted);font-size:.95rem">Developed a multi-section landing page clone. Implemented
+                complex layout structures, including navigation and card gallery, for precise positioning and
+                organization of content elements.</p>
+              <div class="mt-2 d-grid gap-2" style="grid-template-columns: repeat(3, 1fr);">
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/html.jpg"
+                    alt="HTML logo">HTML</span>
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/css.jpg"
+                    alt="CSS logo">CSS</span>
+                <span class="skill-pill justify-content-center w-100"><img src="portfolioimg/js.png"
+                    alt="JS logo">JS</span>
+              </div>
+              <div class="mt-3 d-flex gap-2">
+                <a class="btn btn-sm" style="border:1px solid var(--accent); color:var(--accent);"
+                  href="https://bloom-bharath.netlify.app/" target="_blank">Visit Site</a>
+                <a class="btn btn-sm" style="background:var(--accent); color:var(--bg);"
+                  href="https://github.com/B-12312/Bloom.git" target="_blank">Source</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <h3 class="section-title">Education &amp; Achievements</h3>
+      <div class="row g-4 mt-2">
+        <div class="col-lg-7 scroll-section">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="proj-card p-3">
+                <div class="timeline-date">2025</div>
+                <h5 style="margin-bottom:.1rem">Bachelor of Computer Applications (BCA)</h5>
+                <div style="color:var(--muted);font-size:.95rem;">AJK College of Arts and Science, Coimbatore</div>
+                <div style="color:var(--muted);font-size:.95rem;">CGPA: 7.198</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="proj-card p-3">
+                <div class="timeline-date">2022</div>
+                <h5 style="margin-bottom:.1rem">Higher Secondary (Computer Science)</h5>
+                <div style="color:var(--muted);font-size:.95rem;">K H S S Kannadi</div>
+                <div style="color:var(--muted);font-size:.95rem;">Score: 77.08%</div>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="proj-card p-3">
+                <div class="timeline-date">2020</div>
+                <h5 style="margin-bottom:.1rem">SSLC</h5>
+                <div style="color:var(--muted);font-size:.95rem;">SMM HSS Pazhambalacode</div>
+                <div style="color:var(--muted);font-size:.95rem;">Score: 95.56%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5 scroll-section" style="transition-delay: 0.1s;">
+          <div class="profile-card mb-4">
+            <h6 style="color:var(--text);">Certifications</h6>
+            <ul class="info-list mt-3">
+              <li><i class="fa-solid fa-certificate"></i>IBM Cloud Fundamentals (2024)</li>
+              <li><i class="fa-solid fa-certificate"></i>Oracle Cloud Infrastructure (2024)</li>
+            </ul>
+          </div>
+          <div class="profile-card mb-4">
+            <h6 style="color:var(--text);">Achievements</h6>
+            <ul class="info-list mt-3">
+              <li><i class="fa-solid fa-award"></i>Participated in the Open AI workshop organized by the Department of
+                Computer Science.</li>
+              <li><i class="fa-solid fa-award"></i>Attended a hands-on session on Emerging IT Trends in Full Stack
+                Development.</li>
+              <li><i class="fa-solid fa-award"></i>Participated in an Alumni Talk on Agile &amp; Scrum Project
+                Management.</li>
+            </ul>
+          </div>
+          <div class="profile-card">
+            <h6 style="color:var(--text);">Languages</h6>
+            <div class="skills-grid">
+              <span class="skill-pill">Malayalam</span>
+              <span class="skill-pill">English</span>
+              <span class="skill-pill">Tamil</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <h3 class="section-title">Services</h3>
+      <p class="text-center mb-5" style="color:var(--muted); margin-top:-1.5rem;">What I can do for you</p>
+
+      <div class="row g-4 mt-3">
+        <div class="col-md-6 col-lg-4 scroll-section">
+          <div class="proj-card h-100">
+            <div class="proj-thumb">
+              <img src="portfolioimg/Front_end.jpeg" alt="Front-end Development">
+            </div>
+            <div class="p-3 text-center">
+              <h5 style="margin-bottom:.5rem">Front-End Development</h5>
+              <p style="color:var(--muted);font-size:.95rem">
+                Building responsive, interactive, and accessible user interfaces using HTML, CSS, JavaScript, jQuery and
+                Bootstrap.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 scroll-section" style="transition-delay: 0.1s;">
+          <div class="proj-card h-100">
+            <div class="proj-thumb">
+              <img src="portfolioimg/Back_end.jpeg" alt="Back-end Development">
+            </div>
+            <div class="p-3 text-center">
+              <h5 style="margin-bottom:.5rem">Back-End Development</h5>
+              <p style="color:var(--muted);font-size:.95rem">
+                Developing robust server-side logic and efficient database architectures using Java, Servlets, JDBC,
+                Hibernate, Spring Boot and MySQL.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 scroll-section" style="transition-delay: 0.2s;">
+          <div class="proj-card h-100">
+            <div class="proj-thumb">
+              <img src="portfolioimg/FullStack.jpeg" alt="Full-Stack Development">
+            </div>
+            <div class="p-3 text-center">
+              <h5 style="margin-bottom:.5rem">Full-Stack Development</h5>
+              <p style="color:var(--muted);font-size:.95rem">
+                Delivering complete web solutions by seamlessly integrating front-end interfaces with powerful back-end
+                systems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h3 class="section-title">Get In Touch</h3>
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-5 scroll-section">
+          <p style="color:var(--muted);margin-top:.6rem;">Interested in working together? Send a message</p>
+
+          <div class="profile-card mt-3">
+            <p style="color:var(--muted)">Email: <a href="mailto:bharathshasherofficial@gmail.com"
+                style="color:var(--muted);text-decoration:none;">bharathshasherofficial@gmail.com</a></p>
+            <p style="color:var(--muted)">Phone: <a href="tel:+918590676575"
+                style="color:var(--muted);text-decoration:none;">+91 8590676575</a></p>
+            <div class="mt-2">
+              <a class="btn" href="https://www.linkedin.com/in/bharath-sha-sher-s-p-89024b293"
+                style="border:1px solid var(--accent); color:var(--accent);" target="_blank"><img
+                  src="portfolioimg/linked.jpg" alt="LinkedIn"> LinkedIn</a>
+              <a class="btn" href="https://github.com/B-12312"
+                style="border:1px solid var(--accent); color:var(--accent);" target="_blank"><img
+                  src="portfolioimg/git.jpg" alt="GitHub"> GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7 scroll-section" style="transition-delay: 0.1s;">
+          <form id="contactForm" class="p-3 profile-card">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input id="name" name="name" class="form-control" placeholder="Your name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input id="email" name="email" class="form-control" type="email" placeholder="you@example.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Phone Number</label>
+              <input id="phone" name="phone" class="form-control" type="tel" placeholder="+91 98765 43210">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea id="message" name="message" class="form-control" rows="4"
+                placeholder="Tell me about your project..."></textarea>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button type="reset" class="cta" style="border-color:var(--muted); color:var(--muted)"><i
+                  class="fa fa-eraser"></i> Clear</button>
+              <button id="sendBtn" type="submit" class="cta"><i class="fa fa-paper-plane"></i> Send Message</button>
+            </div>
+            <div id="formMessage" class="mt-3 text-center fw-bold" style="display:none;"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" title="Back to Top"><i class="fa fa-arrow-up"></i></button>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-6 text-md-start mb-2 mb-md-0">© <span id="year"></span> Bharath Sha Sher S.P</div>
+        <div class="col-md-6 text-md-end"><small style="color:var(--muted)">Built with HTML • CSS • Bootstrap •
+            jQuery</small></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    document.getElementById('year').innerText = new Date().getFullYear();
+    $(document.body).addClass('is-visible');
+
+    $(function () {
+      // active nav on scroll
+      var sections = $('section, header');
+      var navLinks = $('.nav-link');
+      function setActive() {
+        var pos = $(document).scrollTop() + 90;
+        sections.each(function () {
+          var top = $(this).offset().top;
+          var bottom = top + $(this).outerHeight();
+          var id = $(this).attr('id');
+          if (pos >= top && pos < bottom) {
+            navLinks.removeClass('active');
+            $('.nav-link[href="#' + id + '"]').addClass('active');
+          }
+        });
+      }
+      setActive();
+      $(document).on('scroll', setActive);
+
+      $('.nav-link').on('click', function () { $('.navbar-collapse').collapse('hide'); });
+
+      $(window).on('scroll', function () {
+        if ($(this).scrollTop() > 50) {
+          $('.navbar').addClass('scrolled');
+        } else {
+          $('.navbar').removeClass('scrolled');
+        }
+      });
+
+      emailjs.init({
+        publicKey: 'tM2NASy-Czhsl4Chh',
+      });
+
+      const emailField = document.getElementById('email');
+      emailField.addEventListener('invalid', function () {
+        if (this.validity.valueMissing) {
+          this.setCustomValidity('Please enter your email address so I can get back to you!');
+        } else if (this.validity.typeMismatch) {
+          this.setCustomValidity('Please enter a valid email address (e.g., name@example.com).');
+        }
+      });
+      emailField.addEventListener('input', function () {
+        this.setCustomValidity('');
+      });
+
+      $('#sendBtn').on('click', function () {
+        $('#contactForm').addClass('show-validation');
+      });
+
+      $('#contactForm').on('submit', function (e) {
+        e.preventDefault();
+
+        var btn = $('#sendBtn');
+        var btnOriginalText = btn.html();
+
+        btn.html('<i class="fa fa-circle-notch fa-spin"></i> Sending...').prop('disabled', true);
+
+        emailjs.sendForm('service_wpnpvub', 'template_3ko1ayj', this)
+          .then(function () {
+            $('#formMessage').removeClass('text-danger').addClass('text-success').html('<i class="fa fa-check-circle"></i> Thank you! Your message has been sent.').fadeIn();
+            btn.html(btnOriginalText).prop('disabled', false);
+            $('#contactForm')[0].reset();
+            $('#contactForm').removeClass('show-validation');
+            setTimeout(function () { $('#formMessage').fadeOut(); }, 5000);
+          }, function (error) {
+            console.error('FAILED...', error);
+            $('#formMessage').removeClass('text-success').addClass('text-danger').html('<i class="fa fa-exclamation-circle"></i> Error: ' + (error.text || 'Something went wrong.')).fadeIn();
+            btn.html(btnOriginalText).prop('disabled', false);
+          });
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            $(entry.target).addClass('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        rootMargin: '0px',
+        threshold: 0.1
+      });
+
+      $('.scroll-section').each(function () {
+        observer.observe(this);
+      });
+
+      var backToTopBtn = $('#backToTop');
+      var stars = $('#stars');
+      $(window).scroll(function () {
+        var scrollPos = $(window).scrollTop();
+        if (scrollPos > 300) {
+          backToTopBtn.fadeIn();
+        } else {
+          backToTopBtn.fadeOut();
+        }
+        stars.css('transform', 'translateY(' + (scrollPos * -0.2) + 'px)');
+      });
+      backToTopBtn.on('click', function () {
+        $('html, body').animate({ scrollTop: 0 }, 300);
+      });
+
+      const toggleBtn = document.getElementById('themeToggle');
+      const icon = toggleBtn.querySelector('i');
+      const currentTheme = localStorage.getItem('theme');
+
+      if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        icon.classList.replace('fa-moon', 'fa-sun');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        if (document.documentElement.getAttribute('data-theme') === 'dark') {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+          icon.classList.replace('fa-sun', 'fa-moon');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          icon.classList.replace('fa-moon', 'fa-sun');
+        }
+      });
+
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+        star.style.animationDelay = (Math.random() * 5) + 's';
+        starsContainer.appendChild(star);
+      }
+    });
+  </script>
+
+</body>
+
+</html>
